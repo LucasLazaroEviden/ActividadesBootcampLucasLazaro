@@ -12,7 +12,6 @@ import java.util.Optional;
 public class ProjectService {
 
     private final List<Project> Projects = new ArrayList<>();
-    private Long contadorId = 1L;
 
     public List<Project> obtenerTodosLosProjects() {
         return Projects;
@@ -23,17 +22,19 @@ public class ProjectService {
     }
 
     public Project crearProject(Project Project) {
-        Project.setId(contadorId++);
         Projects.add(Project);
         return Project;
     }
 
-    public Optional<Project> actualizarProject(Long id, Project ProjectActualizado) {
-        return obtenerProjectPorId(id).map(Project -> {
-            Project.setDescription(ProjectActualizado.getDescription());
-            Project.setLanguage(ProjectActualizado.getLanguage());
-            Project.setOpen(ProjectActualizado.getOpen());
-            return Project;
+    public Optional<Project> actualizarProject(Long id, Project projectActualizado) {
+        return obtenerProjectPorId(id).map(project -> {
+            project.setDescription(projectActualizado.getDescription());
+            project.setLanguage(projectActualizado.getLanguage());
+            project.setOpen(projectActualizado.getOpen());
+            project.setCodes(projectActualizado.getCodes());
+            project.setUsers(projectActualizado.getUsers());
+            project.setDetail(projectActualizado.getDetail());
+            return project;
         });
     }
 
